@@ -476,12 +476,55 @@ function ArenaStats:HumanDuration(seconds)
     return string.format(L["%ih %im"], hours, (minutes - hours * 60))
 end
 
+-- Spec icon lookup table: [class][spec] = iconId, with "default" for class icon
+local SPEC_ICONS = {
+    MAGE = {
+        Frost = 135846, Fire = 135809, Arcane = 135932,
+        default = 626001
+    },
+    PRIEST = {
+        Shadow = 136207, Holy = 237542, Discipline = 135940,
+        default = 626004
+    },
+    DRUID = {
+        Restoration = 136041, Feral = 136112, Balance = 136096,
+        default = 625999
+    },
+    SHAMAN = {
+        Restoration = 136052, Elemental = 136048, Enhancement = 136051,
+        default = 626006
+    },
+    PALADIN = {
+        Retribution = 135873, Holy = 135920, Protection = 236264,
+        default = 626003
+    },
+    WARLOCK = {
+        Affliction = 136145, Demonology = 136172, Destruction = 136186,
+        default = 626007
+    },
+    WARRIOR = {
+        Arms = 132355, Fury = 132347, Protection = 132341,
+        default = 626008
+    },
+    HUNTER = {
+        BeastMastery = 461112, Marksmanship = 236179, Survival = 461113,
+        default = 626000
+    },
+    ROGUE = {
+        Assassination = 132292, Combat = 132090, Subtlety = 132320,
+        default = 626005
+    },
+    DEATHKNIGHT = {
+        Frost = 135773, Unholy = 135775, Blood = 135770,
+        default = 135771
+    },
+}
+
 function ArenaStats:ClassIconId(classSpec)
     if not classSpec then
         return nil
     end
 
-    local spec = classSpec.spec
     local className = classSpec.class
 
     if className == "MAGE" then

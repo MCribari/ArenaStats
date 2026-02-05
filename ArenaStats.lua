@@ -857,4 +857,6 @@ function ArenaStats:ReloadData()
     if self.SetData then
         self:SetData(self:BuildTable())
     end
+=======
+>>>>>>> origin/main
 end
